@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Event;
+use SocialiteProviders\Manager\SocialiteWasCalled;
+use SocialiteProviders\Spotify\SpotifyExtendSocialite;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Register the Spotify driver with Laravel Socialite
+        Event::listen(
+            SocialiteWasCalled::class,
+            [SpotifyExtendSocialite::class, 'handle']
+        );
     }
 }
