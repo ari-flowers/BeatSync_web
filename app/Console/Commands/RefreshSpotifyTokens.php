@@ -11,7 +11,7 @@ class RefreshSpotifyTokens extends Command
     /**
      * The name and signature of the console command.
      */
-    protected $signature = 'spotify:refresh-tokens';
+    protected $signature = 'app:refresh-spotify-tokens';
 
     /**
      * The console command description.

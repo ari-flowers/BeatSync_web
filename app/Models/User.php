@@ -29,6 +29,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'spotify_id',
+        'spotify_token',
+        'spotify_refresh_token',
+        'spotify_token_expires',
     ];
 
     /**
@@ -41,6 +45,8 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+        'spotify_token',
+        'spotify_refresh_token',
     ];
 
     /**
@@ -62,6 +68,32 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'spotify_token_expires' => 'datetime',
         ];
+    }
+    
+    /**
+     * Get the playlists for the user.
+     */
+    public function playlists()
+    {
+        return $this->hasMany(Playlist::class);
+    }
+    
+    /**
+     * Check if the user's Spotify token is connected
+     */
+    public function hasSpotifyConnected(): bool
+    {
+        return $this->spotify_token !== null;
+    }
+    
+    /**
+     * Check if the user's Spotify token needs refreshing
+     */
+    public function needsTokenRefresh(): bool
+    {
+        return $this->spotify_token_expires !== null && 
+               $this->spotify_token_expires->isPast();
     }
 }

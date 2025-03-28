@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // ⏰ Schedule the Spotify token refresh every 10 minutes
-        $schedule->command('spotify:refresh-tokens')->everyTenMinutes();
+        $schedule->command('app:refresh-spotify-tokens')->everyTenMinutes();
     }
 
     /**

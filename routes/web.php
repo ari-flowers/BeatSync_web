@@ -18,7 +18,12 @@ Route::middleware([
     Volt::route('/dashboard', 'dashboard')->name('dashboard');
     Volt::route('/test', 'test-page')->name('test');
 
+    // Check if the user is authenticated before redirecting to Spotify
     Route::get('/auth/spotify', function () {
+        if (!Auth::check()) {
+            return redirect('/login');  // Redirect to login if the user isn't authenticated
+        }
+        
         return Socialite::driver('spotify')->scopes([
             'user-read-private',
             'user-read-email',
@@ -48,7 +53,6 @@ Route::middleware([
 
         return redirect('/dashboard')->with('success', '✅ Spotify connected!');
     });
-
 
     Volt::route('/volt-test', 'volt-test')->name('volt.test');
 });
