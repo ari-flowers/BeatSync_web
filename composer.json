@@ -12,7 +12,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.18",
         "laravel/tinker": "^2.10.1",
-        "livewire/livewire": "*",
+        "livewire/livewire": "^3.0",
         "livewire/volt": "^1.7",
         "socialiteproviders/spotify": "^4.1"
     },

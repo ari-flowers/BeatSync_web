@@ -48,4 +48,7 @@ Route::middleware([
 
         return redirect('/dashboard')->with('success', '✅ Spotify connected!');
     });
+
+
+    Volt::route('/volt-test', 'volt-test')->name('volt.test');
 });

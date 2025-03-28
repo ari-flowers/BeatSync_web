@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 use SocialiteProviders\Spotify\SpotifyExtendSocialite;
+use Livewire\Volt\Volt;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,7 +23,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Register the Spotify driver with Laravel Socialite
+        // Register Volt view paths
+        Volt::mount([
+            resource_path('views/livewire'),
+            resource_path('views/pages'),
+        ]);
+
+        // Register the Spotify Socialite provider
         Event::listen(
             SocialiteWasCalled::class,
             [SpotifyExtendSocialite::class, 'handle']
